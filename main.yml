@@ -18,20 +18,9 @@
       dnf:
         state: latest
         name:
-          - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-35.noarch.rpm
-          - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-35.noarch.rpmfusion
+          - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$releasever.noarch.rpm
+          - https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$releasever.noarch.rpm
         disable_gpg_check: true
-
-      # - name: enable Copr repo for Iosevka fonts
-        # become: true
-        # become_user: root
-        # community.general.copr:
-        #   chroot: x86
-        #   host: copr.fedorainfracloud.org
-        #   state: enabled
-        #   name:
-        #     - peterwu/iosevka
-        #     - oprizal/timeshift
 
     - name: enable Tailscale repo
       become: true
@@ -58,10 +47,6 @@
           - neovim
           - nodejs
           - npm
-            # - iosevka
-            # - iosevka-aile
-            # - iosevka-ss06
-            # - timeshift
           - flatpak
           - obs-studio
           - tailscale
@@ -81,21 +66,17 @@
         name:
           - com.spotify.Client
 
-    - name: ohmyzsh
+    - name: install ohmyzsh
       git:
         repo: https://github.com/ohmyzsh/ohmyzsh
         clone: true
         dest: ~/ohmyzsh
-    - name: spicetify
+    
+    - name: install spicetify
       git:
         repo: https://github.com/spicetify/spicetify-cli
         clone: true
         dest: ~/spicetify-cli
-    - name: powercord
-      git:
-        repo: https://github.com/powercord-org/powercord
-        clone: true
-        dest: powercord
 
     - name: install SpaceVim installation script
       command: "curl -sLf https://spacevim.org/install.sh"
